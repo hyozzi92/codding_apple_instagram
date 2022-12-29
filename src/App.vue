@@ -11,9 +11,13 @@
   </div>
 
   <h4> 안녕 {{$store.state.name}}</h4>
-  <button @click="$store.state.name = 'hyo'">버튼</button>
+  <p> 나이 : {{$store.state.age}}</p>
+  <button @click="$store.commit('nameChange')">버튼</button>
+  <button @click="$store.commit('increaseAge',10)">나이버튼</button>
 
   <Container  :step="step" :data="data" :urlData="urlData"  @textValue="textValue = $event"/>
+
+  <p>{{$store.state.more}}</p>
   <button @click="more">더보기</button>
 
   <div class="footer">

@@ -6,7 +6,8 @@
     </div>
     <div :class="data.filter" class="post-body" :style="{backgroundImage : `url(${data.postImage})`}"></div>
     <div class="post-content">
-      <p>{{data.likes}}</p>
+
+      <p @click="$store.commit('clickedLikes')">{{$store.state.likes}}</p>
       <p><strong>{{data.name}}</strong> {{data.content}}</p>
       <p class="date">May 15</p>
     </div>
