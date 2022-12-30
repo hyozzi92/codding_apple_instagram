@@ -12,6 +12,9 @@ const store = createStore({
     }
   },
   mutations : {
+    setMore(state, data) {
+      state.more = data
+    },
     nameChange(state){
       state.name = 'park';
       state.name == !state.name
@@ -31,8 +34,9 @@ const store = createStore({
     }
   },
   actions : {
-    getData(){
-    axios.get('https://codingapple1.github.io/vue/more0.json').then(()=>{})
+    getData(context){
+    axios.get('https://codingapple1.github.io/vue/more0.json')
+        .then((a)=>{ context.commit ('setMore', (a.data))})
     }
   }
 

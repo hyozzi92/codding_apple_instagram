@@ -10,15 +10,18 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
-  <h4> 안녕 {{$store.state.name}}</h4>
-  <p> 나이 : {{$store.state.age}}</p>
-  <button @click="$store.commit('nameChange')">버튼</button>
-  <button @click="$store.commit('increaseAge',10)">나이버튼</button>
+  <h4> 안녕 {{$store.state.name}} {{$store.state.age}}</h4>
+  <p> 나이 : </p>
+  <button @click="nameChange">버튼</button>
+  <button @click="increaseAge(10)">나이버튼</button>
 
   <Container  :step="step" :data="data" :urlData="urlData"  @textValue="textValue = $event"/>
 
   <p>{{$store.state.more}}</p>
-  <button @click="more">더보기</button>
+  <button @click="setMore">더보기</button>
+
+  <p>{{name}} {{age}} {{likes}}</p>
+  <button @click="counter++" >버튼</button>
 
   <div class="footer">
     <ul class="footer-button-plus">
@@ -35,6 +38,7 @@
 import Container from './Container'
 import data from './data'
 import axios from 'axios'
+import {mapState,mapMutations} from 'vuex'
 
 axios.post()
 
@@ -49,6 +53,7 @@ export default {
       urlData : '',
       textValue: '',
       selectedFilter : '',
+      counter :0,
     }
   },
   mounted() {
@@ -57,7 +62,14 @@ export default {
       console.log(this.selectedFilter)
     })
   },
+  computed:{
+    ...mapState(['name','age','likes'])
+  },
   methods : {
+  ...mapMutations(['setMore','nameChange','increaseAge']),
+    now(){
+      return new Date()
+    },
     more(){
       axios.get(`https://codingapple1.github.io/vue/more${this.moreSee}.json`)
           .then((result)=>{
