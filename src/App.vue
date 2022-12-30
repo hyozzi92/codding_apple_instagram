@@ -13,7 +13,7 @@
   <h4> 안녕 {{$store.state.name}} {{$store.state.age}}</h4>
   <p> 나이 : </p>
   <button @click="nameChange">버튼</button>
-  <button @click="increaseAge(10)">나이버튼</button>
+  <button @click="$store.commit('increaseAge',10)">나이버튼</button>
 
   <Container  :step="step" :data="data" :urlData="urlData"  @textValue="textValue = $event"/>
 
@@ -63,9 +63,10 @@ export default {
     })
   },
   computed:{
-    ...mapState(['name','age','likes'])
+
   },
   methods : {
+    ...mapState(['name','age','likes']),
   ...mapMutations(['setMore','nameChange','increaseAge']),
     now(){
       return new Date()
