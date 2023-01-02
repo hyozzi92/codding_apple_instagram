@@ -21,13 +21,18 @@
     <textarea @input="$emit('textValue', $event.target.value)" class="write-box">write!</textarea>
   </div>
     </div>
+
+    <div v-if="step == 3">
+      <Mypage :one="1"/>
+    </div>
+
   </div>
 </template>
 
 <script>
 import Post from './Post'
 import FilterBox from "@/components/FilterBox";
-
+import Mypage from "@/components/Mypage";
 
 export default {
   name: "TheContainer",
@@ -56,6 +61,7 @@ export default {
   components:{
     Post,
     FilterBox,
+    Mypage,
   }
 }
 </script>

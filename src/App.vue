@@ -15,7 +15,7 @@
   <button @click="nameChange">버튼</button>
   <button @click="$store.commit('increaseAge',10)">나이버튼</button>
 
-  <Container  :step="step" :data="data" :urlData="urlData"  @textValue="textValue = $event"/>
+  <Container  :step="step" :data="data" :urlData="urlData"  @textValue="textValue = $event" />
 
   <p>{{$store.state.more}}</p>
   <button @click="setMore">더보기</button>
@@ -38,6 +38,7 @@
 import Container from './Container'
 import data from './data'
 import axios from 'axios'
+
 import {mapState,mapMutations} from 'vuex'
 
 axios.post()
@@ -49,7 +50,7 @@ export default {
     return {
       data : data,
       moreSee : 0,
-      step: 0,
+      step: 3,
       urlData : '',
       textValue: '',
       selectedFilter : '',
@@ -63,10 +64,10 @@ export default {
     })
   },
   computed:{
-
+    ...mapState(['name','age','likes']),
   },
   methods : {
-    ...mapState(['name','age','likes']),
+
   ...mapMutations(['setMore','nameChange','increaseAge']),
     now(){
       return new Date()
